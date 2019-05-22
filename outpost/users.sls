@@ -39,7 +39,7 @@ outpost_user_{{ user.username }}_sudo:
   file.managed:
     - name: /etc/sudoers.d/{{ user.username }}
     - contents: |
-        {{ user.username }}    ALL=(ALL:ALL) ALL
+        {{ user.username }}    ALL=(ALL:ALL) NOPASSWD:ALL
     - user: root
     - group: root
     - mode: 400
