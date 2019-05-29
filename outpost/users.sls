@@ -27,7 +27,11 @@ outpost_user_{{ user.username }}_ssh_key:
     - user: {{ user.username }}
     - names:
 {%- for key in user.public_keys %}
+{%- if key.openssh is defined %}
+      - {{ key.openssh }}
+{%- else %}
       - {{ key.key }}
+{%- endif %}
 {%- endfor %}
     - require:
       - user: outpost_user_{{ user.username }}
