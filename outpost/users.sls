@@ -6,7 +6,11 @@ outpost_user_{{ user.username }}:
     - home: {{ user.homedir }}
     - shell: {{ user.shell }}
     - createhome: true
+    {%- if grains['pythonversion'][0] < 3 %}
+    - fullname: "{{ user.displayname.decode('utf-8') }}"
+    {%- else %}
     - fullname: "{{ user.displayname }}"
+    {%- endif %}
     - gid_from_name: true
     {%- if user.groups is defined %}
     - groups:
