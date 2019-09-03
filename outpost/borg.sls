@@ -7,9 +7,9 @@ outpost_borg_{{ server.name }}:
     - shell: /bin/false
     - createhome: true
     {%- if grains['pythonversion'][0] < 3 %}
-    - fullname: "{{ user.name.decode('utf-8') }}"
+    - fullname: "{{ server.name.decode('utf-8') }}"
     {%- else %}
-    - fullname: "{{ user.name }}"
+    - fullname: "{{ server.name }}"
     {%- endif %}
     - gid_from_name: true
 
