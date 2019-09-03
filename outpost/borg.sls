@@ -4,7 +4,7 @@ outpost_borg_{{ server.name }}:
     - name: {{ server.username }}
     - system: True
     - home: {{ server.path }}
-    - shell: /bin/false
+    - shell: /bin/sh
     - createhome: true
     {%- if grains['pythonversion'][0] < 3 %}
     - fullname: "{{ server.name.decode('utf-8') }}"
