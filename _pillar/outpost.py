@@ -56,4 +56,4 @@ def ext_pillar(minion_id,
     except RequestException as e:
         logger.warning(e)
     else:
-        return r.json()
+        return {"outpost": r.json()}
