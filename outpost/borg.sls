@@ -28,6 +28,7 @@ outpost_borg_{{ server.name }}_ssh_key:
 {%- for repository in server.repositories %}
 outpost_borg_{{ server.name }}_repository_{{ repository.name }}:
   file.directory:
+    - name: {{ repository.path }}
     - user: {{ server.username }}
     - group: root
     - dir_mode: 700
