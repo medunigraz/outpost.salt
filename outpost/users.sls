@@ -1,4 +1,4 @@
-{%- for user in pillar.outpost.system.users %}
+{%- for user in pillar.outpost.system.get('users', []) %}
 outpost_user_{{ user.username }}:
   user.present:
     - name: {{ user.username }}
