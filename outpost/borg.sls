@@ -19,6 +19,7 @@ outpost_borg_{{ server.name }}_ssh_key:
   ssh_auth.present:
     - user: {{ server.username }}
     - names:
+      - {{ server.openssh }}
       {%- for repository in server.repositories %}
       - command="borg serve --restrict-to-path {{ repository.path }}",restrict {{ repository.openssh }}
       {% endfor %}
