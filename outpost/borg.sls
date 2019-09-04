@@ -13,20 +13,18 @@ outpost_borg_{{ server.name }}:
     {%- endif %}
     - gid_from_name: true
 
-{%- if server.repositories is iterable %}
-{%- if server.repositories |length > 0 %}
 outpost_borg_{{ server.name }}_ssh_key:
   ssh_auth.present:
     - user: {{ server.username }}
     - names:
       - {{ server.openssh }}
-      {%- for repository in server.repositories %}
+      {%- for repository in server.get('repositories', []) %}
       - command="borg serve --restrict-to-path {{ repository.path }}",restrict {{ repository.openssh }}
       {% endfor %}
     - require:
       - user: outpost_borg_{{ server.name }}
 
-{%- for repository in server.repositories %}
+{%- for repository in server.get('repositories', []) %}
 outpost_borg_{{ server.name }}_repository_{{ repository.name }}:
   file.directory:
     - name: {{ repository.path }}
@@ -37,6 +35,4 @@ outpost_borg_{{ server.name }}_repository_{{ repository.name }}:
     - require:
       - user: outpost_borg_{{ server.name }}
 {%- endfor %}
-{%- endif %}
-{%- endif %}
 {%- endfor %}
