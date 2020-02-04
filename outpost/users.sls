@@ -6,6 +6,8 @@ outpost_user_{{ user.username }}:
     - home: {{ user.homedir }}
     - shell: {{ user.shell }}
     - createhome: true
+    - allow_uid_change: true
+    - allow_gid_change: true
     {%- if grains['pythonversion'][0] < 3 %}
     - fullname: "{{ user.displayname.decode('utf-8') }}"
     {%- else %}
