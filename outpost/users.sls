@@ -1,3 +1,4 @@
+{% set saltversion = salt['grains.get']('saltversion') %}
 {%- for user in pillar.outpost.system.get('users', []) %}
 outpost_user_{{ user.username }}:
   user.present:
@@ -13,7 +14,9 @@ outpost_user_{{ user.username }}:
     {%- else %}
     - fullname: "{{ user.displayname }}"
     {%- endif %}
+    {%- if salt['pkg.version_cmp'](saltversion, '3001') < 0 %}
     - gid_from_name: true
+    {%- endif %}
     {%- if user.groups is defined %}
     - groups:
     {%- for group in user.groups %}
