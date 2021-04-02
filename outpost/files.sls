@@ -4,7 +4,7 @@
 outpost_file_{{ file.path }}:
   file.managed:
     - name: {{ file.path }}
-    - source: {{ file.content }}
+    - source: salt://outpost/{{ file.source }}
     - source_hash: {{ file.sha256 }}
     - mode: {{ file.permissions }}
     - owner: {{ file.owner }}
@@ -12,5 +12,5 @@ outpost_file_{{ file.path }}:
     - unless:
       - sha256sum {{ file.path }} |grep '^{{ file.sha256 }} '
     - require:
-      - user: outpost_user{{ file.owner }}
+      - user: outpost_user_{{ file.owner }}
 {%- endfor %}
