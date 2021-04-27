@@ -19,7 +19,7 @@ outpost_borg_{{ server.name }}_ssh_key:
     - names:
       - {{ server.openssh }}
       {%- for repository in server.get('repositories', []) %}
-      - command="borg serve {% if respository.get('append_only', False) %}--append-only {% endif %}--restrict-to-path {{ repository.path }}",restrict {{ repository.openssh }}
+      - command="borg serve {% if repository.get('append_only', False) %}--append-only {% endif %}--restrict-to-path {{ repository.path }}",restrict {{ repository.openssh }}
       {% endfor %}
     - require:
       - user: outpost_borg_{{ server.name }}
