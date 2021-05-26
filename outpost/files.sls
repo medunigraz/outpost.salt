@@ -1,4 +1,4 @@
-#!jinja|yaml|gpg
+#!jinja|yaml
 
 {%- for file in pillar.outpost.system.get('files', []) %}
 outpost_file_{{ file.path }}:
