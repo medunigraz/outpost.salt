@@ -16,6 +16,8 @@ outpost_user_{{ user.username }}:
     {%- endif %}
     {%- if salt['pkg.version_cmp'](saltversion, '3001') < 0 %}
     - gid_from_name: true
+    {%- else %}
+    - usergroup: false
     {%- endif %}
     {%- if user.groups is defined %}
     - groups:
