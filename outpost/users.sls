@@ -49,6 +49,17 @@ outpost_user_{{ user.username }}_ssh_key:
 {%- endif %}
 {%- endif %}
 
+{%- for directory in user.get('directories', []) %}
+outpost_user_{{ user.username }}_directory_{{ directory.path }}:
+  file.directory:
+    - name: {{ directory.path }}
+    - user: {{ user.username }}
+    - group: {{ user.username }}
+    - dir_mode: {{ directory.permissions }}
+    - require:
+        - user: outpost_user_{{ user.username }}
+{%- endfor %}
+
 {%- if user.get('sudo', False) %}
 outpost_user_{{ user.username }}_sudo:
   file.managed:
