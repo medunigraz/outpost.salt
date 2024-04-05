@@ -4,6 +4,7 @@ outpost_user_{{ user.username }}:
   user.present:
     - name: {{ user.username }}
     - uid: {{ user.uid }}
+    - gid: {{ user.uid }}
     - home: {{ user.homedir }}
     - shell: {{ user.shell }}
     - createhome: true
