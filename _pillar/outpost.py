@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import (
-    absolute_import,
-    print_function,
-    unicode_literals,
-)
-
 import logging
 import re
-
-from salt.ext import six
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +8,7 @@ grain_pattern = re.compile(r'<(?P<grain_name>.*?)>')
 try:
     import requests
     from requests.exceptions import RequestException
-    from salt.ext.six.moves.urllib.parse import quote as _quote
+    from urllib.parse import quote
     _HAS_DEPENDENCIES = True
 except ImportError:
     _HAS_DEPENDENCIES = False
@@ -48,7 +40,7 @@ def ext_pillar(minion_id,
                 )
                 return {}
 
-            grain_value = _quote(six.text_type(grain_value))
+            grain_value = quote(str(grain_value))
             url = re.sub('<{0}>'.format(grain_name), grain_value, url)
     try:
         r = requests.get(url, auth=(username, password))
