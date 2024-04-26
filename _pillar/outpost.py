@@ -24,7 +24,7 @@ def ext_pillar(minion_id,
                username=None,
                password=None,
                with_grains=False):
-    url = url.replace('%s', _quote(minion_id))
+    url = url.replace('%s', quote(minion_id))
     if with_grains:
         # Get the value of the grain and substitute each grain
         # name for the url-encoded version of its grain value.
