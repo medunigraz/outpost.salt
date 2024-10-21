@@ -11,7 +11,7 @@ outpost_borg_{{ server.name }}:
     {%- else %}
     - fullname: "{{ server.name }}"
     {%- endif %}
-    - gid_from_name: true
+    - usergroup: true
 
 outpost_borg_{{ server.name }}_ssh_key:
   ssh_auth.present:
